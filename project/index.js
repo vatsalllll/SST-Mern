@@ -77,6 +77,14 @@ app.put('/api/products/:id' , async(req , res)=>{
 })
 
 
+/// Delete a Resource
+
+app.delete('/api/products/:id' , async(req , res)=>{
+  const deletedProduct = await ProductModel.findByIdAndDelete(req.params.id)
+
+  res.json(deletedProduct)
+})
+
 
 
 app.listen(8086, () => {
