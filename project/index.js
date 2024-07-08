@@ -69,6 +69,13 @@ app.get('/api/products/:id' , async(req , res)=>{
  return res.json(product)
 })
 
+// Update product
+
+app.put('/api/products/:id' , async(req , res)=>{
+  const updatedProduct = await ProductModel.findByIdAndUpdate(req.params.id , req.body)
+  return res.json(updatedProduct)
+})
+
 
 
 
