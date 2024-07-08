@@ -63,6 +63,12 @@ app.get('/api/products' , async(req , res)=>{
 
 // Get product by id
 
+app.get('/api/products/:id' , async(req , res)=>{
+ const product = await ProductModel.findById(req.params.id)
+
+ return res.json(product)
+})
+
 
 
 
