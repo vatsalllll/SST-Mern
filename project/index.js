@@ -13,7 +13,7 @@ mongoose
     console.log("Db Connected");
   })
   .catch((err) => {
-    console.log("Failed", err);
+    console.log("Db connection Failed", err);
   });
 
 // ProductSchema
@@ -37,23 +37,34 @@ const productSchema = new mongoose.Schema({
   },
 });
 
-const productModel = mongoose.model("products", productSchema);
+const ProductModel = mongoose.model("products", productSchema);
 
 // Create
 
 app.post("/api/products", async (req, res) => {
-   await productModel.create({
+   await ProductModel.create({
     product_name: req.body.product_name,
     product_price: req.body.product_price,
     isInStock: req.body.isInStock,
     category: req.body.category,
   });
 
-
-
-
   return res.status(201).json({ message: "Product Created" });
 });
+
+
+// get route
+
+app.get('/api/products' , async(req , res)=>{
+   const allProucts = await ProductModel.find({isInStock:true})
+
+   return res.json(allProucts)
+})
+
+// Get product by id
+
+
+
 
 app.listen(8086, () => {
   console.log("Server sarted at port 8086");
