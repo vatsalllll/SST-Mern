@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 require('dotenv').config()
+const productRoutes = require('./routes/productRoutes')
 
 
 app.use(express.json());
@@ -15,6 +16,8 @@ mongoose
     console.log("Db connection Failed", err);
   });
 
+
+  app.use('/api/products' , productRoutes)
 
 
 
